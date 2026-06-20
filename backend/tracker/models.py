@@ -77,6 +77,13 @@ class Enrollment(models.Model):
     student_status = models.CharField(max_length=20, choices=StudentStatus.choices)
     # Add any additional fields as needed
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=[
+            'student', 'classroom', 'semester', 'year'], 
+            name='unique_enrollment'
+            )
+        ]
+
     def __str__(self):
         return f"{self.student} - {self.classroom}"
 
@@ -86,5 +93,11 @@ class AttendanceRecord(models.Model):
     present = models.BooleanField()
     # Add any additional fields as needed
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['enrollment', 'date'], 
+                                              name='unique_attendance'
+                                              )
+        ]
+    
     def __str__(self):
         return f"{self.enrollment} - {self.date} - {'Present' if self.present else 'Absent'}"
