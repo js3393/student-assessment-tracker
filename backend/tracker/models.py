@@ -7,7 +7,6 @@ from django.db import models
 # Create your models here.
 class TeacherProfile(models.Model):
     user_account = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    program_location = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     start_date = models.DateField()
     # Add any additional fields as needed

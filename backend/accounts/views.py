@@ -1,13 +1,10 @@
-from random import randint
-from urllib import request
-
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
 # Create your views here.
-def index(request):
+def login_view(request):
 
     if request.method == "POST":
         username = request.POST.get('username')
@@ -19,8 +16,8 @@ def index(request):
             return redirect('dashboard')
         else:
             messages.success(request, "There was an error with your login")
-            return render(request, "accounts/index.html", {"error": "Invalid Login Credentials"})
+            return render(request, "accounts/login_view.html", {"error": "Invalid Login Credentials"})
     else:
-        return render(request, "accounts/index.html", {"error": None})
+        return render(request, "accounts/login_view.html", {"error": None})
     
 
